@@ -1,0 +1,36 @@
+{
+  "name": "flash-freeze",
+  "version": "0.1.0",
+  "description": "Um jogo de guerra de bolas de neve em 3D inspirado no clássico Macromedia Flash 'Snow War'",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "python -m http.server 8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caiomaggiore/FlashFreeze.git"
+  },
+  "keywords": [
+    "game",
+    "3d",
+    "snow",
+    "war",
+    "threejs",
+    "cannonjs",
+    "javascript",
+    "html5",
+    "offline"
+  ],
+  "author": "Caio Maggiore",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/caiomaggiore/FlashFreeze/issues"
+  },
+  "homepage": "https://github.com/caiomaggiore/FlashFreeze#readme",
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

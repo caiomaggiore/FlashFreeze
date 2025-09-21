@@ -1,0 +1,43 @@
+{
+  "name": "Flash Freeze",
+  "version": "0.1.0",
+  "description": "Jogo de guerra de bolas de neve em 3D - Versão inicial com gameplay completo",
+  "game_info": {
+    "title": "Flash Freeze",
+    "subtitle": "3D Snow War Game",
+    "genre": "Action/Strategy",
+    "players": "Single Player vs AI",
+    "platform": "Web Browser",
+    "engine": "Three.js + Cannon.js"
+  },
+  "features": {
+    "graphics": "3D rendering with shadows and lighting",
+    "physics": "Realistic snowball physics and collisions",
+    "ai": "Adaptive enemy behavior",
+    "controls": "Keyboard-based character control",
+    "animations": "Character crouch and lean animations",
+    "ui": "Real-time HUD with health bars and trajectory preview",
+    "configuration": "Adjustable movement speeds and settings"
+  },
+  "technical": {
+    "offline": true,
+    "local_libraries": true,
+    "canvas_rendering": true,
+    "webgl_required": true
+  },
+  "changelog": {
+    "0.1.0": {
+      "date": "2025-09-21",
+      "changes": [
+        "Initial release with complete 3D snow war gameplay",
+        "Character movement and animation system",
+        "Physics-based snowball mechanics",
+        "AI-controlled enemy behavior",
+        "Configurable settings panel",
+        "Health and progress tracking systems",
+        "Trajectory preview and impact prediction",
+        "Offline-first architecture with local libraries"
+      ]
+    }
+  }
+}

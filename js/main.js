@@ -1,6 +1,13 @@
 /**
- * main.js - Arquivo principal que inicializa o jogo New War Snow
+ * Flash Freeze - Main Game Controller
+ * 3D Snow War Game inspired by classic Macromedia Flash games
+ * Version: 0.1.0
+ * Date: 2025-09-21
  */
+
+// Game version info
+const GAME_VERSION = '0.1.0';
+const GAME_BUILD_DATE = '2025-09-21';
 
 // Global game objects
 let gameEngine = null;
@@ -12,7 +19,7 @@ let configPanel = null;
 
 // Game initialization
 function initGame() {
-    console.log('Inicializando Flash Freeze...');
+    console.log(`Inicializando Flash Freeze v${GAME_VERSION} (${GAME_BUILD_DATE})...`);
     
     try {
         // Show loading screen
