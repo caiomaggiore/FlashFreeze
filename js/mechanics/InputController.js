@@ -74,6 +74,11 @@ class InputController {
                 this.startChargingThrow();
                 break;
                 
+                case 'KeyE':
+                    // Abrir Editor 3D Profissional na mesma janela
+                    window.location.href = 'editor.html';
+                    break;
+                
             case 'KeyC':
                 this.captureCameraParameters();
                 break;
@@ -431,5 +436,15 @@ camera.lookAt(${params.target.x.toFixed(1)}, ${params.target.y.toFixed(1)}, ${pa
     simulateKeyRelease(keyCode) {
         this.keys[keyCode] = false;
         this.handleKeyUp({ code: keyCode });
+    }
+    
+    // Adicionar suporte para abrir editor 3D
+    handleSpecialKeys(event) {
+        const key = event.key.toLowerCase();
+        
+        // Editor 3D
+        if (key === 'e') {
+            window.open('editor.html', '_blank');
+        }
     }
 }

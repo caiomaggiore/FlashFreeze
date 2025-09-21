@@ -1,6 +1,6 @@
 {
   "name": "flash-freeze",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Um jogo de guerra de bolas de neve em 3D inspirado no clássico Macromedia Flash 'Snow War'",
   "main": "index.html",
   "scripts": {

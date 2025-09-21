@@ -1,6 +1,6 @@
 {
   "name": "Flash Freeze",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Jogo de guerra de bolas de neve em 3D - Versão inicial com gameplay completo",
   "game_info": {
     "title": "Flash Freeze",
@@ -26,6 +26,21 @@
     "webgl_required": true
   },
   "changelog": {
+    "0.2.0": {
+      "date": "2025-09-21",
+      "changes": [
+        "🎨 Professional 3D Editor integrated into the game",
+        "🛠️ Complete modeling tools system (Extrude, Chamfer, Bevel, etc.)",
+        "🎯 Visual controls inspired by 3DS Max and Tripo3D Studio",
+        "🔧 Transform tools: Move, Scale, Rotate with visual helpers",
+        "🔲 Professional wireframe system (white thin lines)",
+        "⌨️ Keyboard shortcuts for optimized workflow",
+        "🎮 Seamless game ↔ editor integration (same window)",
+        "💡 3-point cinematic lighting system",
+        "📷 Enhanced camera controls with macro zoom",
+        "🎯 Intelligent selection system (Shift/Alt modifiers)"
+      ]
+    },
     "0.1.0": {
       "date": "2025-09-21",
       "changes": [

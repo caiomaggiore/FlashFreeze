@@ -6,7 +6,7 @@
  */
 
 // Game version info
-const GAME_VERSION = '0.1.0';
+const GAME_VERSION = '0.2.0';
 const GAME_BUILD_DATE = '2025-09-21';
 
 // Global game objects
