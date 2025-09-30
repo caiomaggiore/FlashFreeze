@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash Freeze - Editor 3D Moderno</title>
+    
+    <!-- Import Map para Three.js -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "../libs/three.module.js",
+            "three/addons/": "../libs/jsm/"
+        }
+    }
+    </script>
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/editor.css">
+    
+    <!-- Fontes -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Interface Principal -->
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <h1 class="logo">
+                    <i class="fas fa-snowflake"></i>
+                    Flash Freeze Editor
+                </h1>
+            </div>
+            <div class="header-center">
+                <div class="toolbar">
+                    <button class="btn btn-primary" id="new-scene">
+                        <i class="fas fa-file"></i> Nova Cena
+                    </button>
+                    <button class="btn" id="open-file">
+                        <i class="fas fa-folder-open"></i> Abrir
+                    </button>
+                    <button class="btn" id="save-scene">
+                        <i class="fas fa-save"></i> Salvar
+                    </button>
+                    <div class="divider"></div>
+                    <button class="btn" id="undo">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                    <button class="btn" id="redo">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="btn btn-secondary" id="back-to-game">
+                    <i class="fas fa-gamepad"></i> Voltar ao Jogo
+                </button>
+            </div>
+        </header>
+
+        <!-- Layout Principal - Fullscreen -->
+        <div class="main-layout-fullscreen">
+            <!-- Viewport Central - Fullscreen -->
+            <main class="viewport-fullscreen">
+                <div id="viewport" class="viewport"></div>
+                <div class="viewport-overlay">
+                    <div class="viewport-info">
+                        <span id="fps-counter">FPS: 60</span>
+                        <span id="object-count">Objetos: 0</span>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Toggle Buttons - Fixed on Screen Edges -->
+            <button class="sidebar-toggle-fixed left-toggle" id="left-toggle-fixed" title="Mostrar Ferramentas">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <button class="sidebar-toggle-fixed right-toggle" id="right-toggle-fixed" title="Mostrar Propriedades">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+
+            <!-- Botão de Minimizar (fora do sidebar expandido) -->
+            <button class="sidebar-minimize-fixed" id="left-minimize-fixed" title="Minimizar">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+
+            <!-- Botão de Expandir (fora do sidebar minimizado) -->
+            <button class="sidebar-expand-fixed" id="left-expand-fixed" title="Expandir">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <!-- Botão de Minimizar do Sidebar Direito (fora do sidebar expandido) -->
+            <button class="sidebar-minimize-fixed right" id="right-minimize-fixed" title="Minimizar">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+
+            <!-- Botão de Expandir do Sidebar Direito (fora do sidebar minimizado) -->
+            <button class="sidebar-expand-fixed right" id="right-expand-fixed" title="Expandir">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+
+            <!-- Sidebar Esquerda - Flutuante -->
+            <aside class="sidebar-floating left-sidebar" id="left-sidebar">
+                <div class="sidebar-content">
+
+                <!-- Grupo de Ferramentas de Movimento -->
+                <div class="panel">
+                    <h3>Ferramentas</h3>
+                    <div class="tool-group">
+                        <button class="tool-btn active" data-tool="select">
+                            <i class="fas fa-mouse-pointer"></i>
+                            <span>Selecionar</span>
+                        </button>
+                        <button class="tool-btn" data-tool="move">
+                            <i class="fas fa-arrows-alt"></i>
+                            <span>Mover</span>
+                        </button>
+                        <button class="tool-btn" data-tool="rotate">
+                            <i class="fas fa-sync-alt"></i>
+                            <span>Rotacionar</span>
+                        </button>
+                        <button class="tool-btn" data-tool="scale">
+                            <i class="fas fa-expand-arrows-alt"></i>
+                            <span>Escalar</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Grupo de Objetos e Luzes com Submenu -->
+                <div class="panel">
+                    <h3>Adicionar</h3>
+                    
+                    <!-- Botões individuais para modo expandido -->
+                    <div class="object-group">
+                        <button class="object-btn" data-object="box">
+                            <i class="fas fa-cube"></i>
+                            <span>Cubo</span>
+                        </button>
+                        <button class="object-btn" data-object="sphere">
+                            <i class="fas fa-circle"></i>
+                            <span>Esfera</span>
+                        </button>
+                        <button class="object-btn" data-object="cylinder">
+                            <i class="fas fa-cylinder"></i>
+                            <span>Cilindro</span>
+                        </button>
+                        <button class="object-btn" data-object="plane">
+                            <i class="fas fa-square"></i>
+                            <span>Plano</span>
+                        </button>
+                    </div>
+                    
+                    <div class="light-group">
+                        <button class="object-btn" data-object="light-ambient">
+                            <i class="fas fa-sun"></i>
+                            <span>Luz Ambiente</span>
+                        </button>
+                        <button class="object-btn" data-object="light-directional">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>Luz Direcional</span>
+                        </button>
+                        <button class="object-btn" data-object="light-point">
+                            <i class="fas fa-circle"></i>
+                            <span>Luz Pontual</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Grupos para modo minimizado -->
+                    <div class="group-btn-container">
+                        <button class="group-btn" id="objects-group-btn">
+                            <i class="fas fa-cube"></i>
+                            <span>Objetos</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="submenu" id="objects-submenu">
+                            <button class="object-btn" data-object="box">
+                                <i class="fas fa-cube"></i>
+                                <span>Cubo</span>
+                            </button>
+                            <button class="object-btn" data-object="sphere">
+                                <i class="fas fa-circle"></i>
+                                <span>Esfera</span>
+                            </button>
+                            <button class="object-btn" data-object="cylinder">
+                                <i class="fas fa-cylinder"></i>
+                                <span>Cilindro</span>
+                            </button>
+                            <button class="object-btn" data-object="plane">
+                                <i class="fas fa-square"></i>
+                                <span>Plano</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="group-btn-container">
+                        <button class="group-btn" id="lights-group-btn">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>Luzes</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="submenu" id="lights-submenu">
+                            <button class="object-btn" data-object="light-ambient">
+                                <i class="fas fa-sun"></i>
+                                <span>Luz Ambiente</span>
+                            </button>
+                            <button class="object-btn" data-object="light-directional">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Luz Direcional</span>
+                            </button>
+                            <button class="object-btn" data-object="light-point">
+                                <i class="fas fa-circle"></i>
+                                <span>Luz Pontual</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grupo de Import com Submenu -->
+                <div class="panel">
+                    <h3>Importar</h3>
+                    
+                    <!-- Botões individuais para modo expandido -->
+                    <div class="import-group">
+                        <button class="import-btn" id="import-gltf">
+                            <i class="fas fa-file-import"></i>
+                            <span>GLB/GLTF</span>
+                        </button>
+                        <button class="import-btn" id="import-obj">
+                            <i class="fas fa-file-import"></i>
+                            <span>OBJ</span>
+                        </button>
+                        <button class="import-btn" id="import-fbx">
+                            <i class="fas fa-file-import"></i>
+                            <span>FBX</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Grupo para modo minimizado -->
+                    <div class="group-btn-container">
+                        <button class="group-btn" id="import-group-btn">
+                            <i class="fas fa-file-import"></i>
+                            <span>Importar</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="submenu" id="import-submenu">
+                            <button class="import-btn" id="import-gltf">
+                                <i class="fas fa-file-import"></i>
+                                <span>GLB/GLTF</span>
+                            </button>
+                            <button class="import-btn" id="import-obj">
+                                <i class="fas fa-file-import"></i>
+                                <span>OBJ</span>
+                            </button>
+                            <button class="import-btn" id="import-fbx">
+                                <i class="fas fa-file-import"></i>
+                                <span>FBX</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="sidebar-resize-handle left" id="left-resize-handle"></div>
+                <div class="sidebar-resize-handle right" id="left-resize-handle-right"></div>
+            </aside>
+
+            <!-- Sidebar Direita - Flutuante -->
+            <aside class="sidebar-floating right-sidebar" id="right-sidebar">
+                <div class="sidebar-content">
+                <!-- Lista de Cena - FIXA NO TOPO -->
+                <div class="panel scene-panel-fixed">
+                    <h3>Cena</h3>
+                    <div id="scene-panel">
+                        <div class="scene-item">
+                            <i class="fas fa-camera"></i>
+                            <span>Camera</span>
+                        </div>
+                        <div class="scene-item">
+                            <i class="fas fa-sun"></i>
+                            <span>Luz Ambiente</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Propriedades do Item Selecionado -->
+                <div class="panel">
+                    <h3>Propriedades</h3>
+                    <div id="properties-panel">
+                        <p class="no-selection">Nenhum objeto selecionado</p>
+                    </div>
+                </div>
+
+                <!-- Materiais -->
+                <div class="panel">
+                    <h3>Materiais</h3>
+                    <div id="materials-panel">
+                        <p class="no-materials">Nenhum material</p>
+                    </div>
+                </div>
+                </div>
+                <div class="sidebar-resize-handle left" id="right-resize-handle"></div>
+                <div class="sidebar-resize-handle right" id="right-resize-handle-right"></div>
+            </aside>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="status-bar">
+                <span id="status-text">Pronto</span>
+                <span id="coordinates">X: 0, Y: 0, Z: 0</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Input de arquivo oculto -->
+    <input type="file" id="file-input" accept=".glb,.gltf,.obj,.fbx" style="display: none;">
+
+    <!-- Scripts -->
+    <script type="module" src="js/Editor3D.js"></script>
+</body>
+</html>

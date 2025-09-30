@@ -1,0 +1,1018 @@
+/* Reset e Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #1a1a1a;
+    color: #ffffff;
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* Layout Principal */
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 60px;
+    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+    border-bottom: 1px solid #333;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 700;
+    color: #00d4ff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo i {
+    font-size: 24px;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.divider {
+    width: 1px;
+    height: 24px;
+    background: #444;
+    margin: 0 8px;
+}
+
+/* Botões */
+.btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    background: #333;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: #444;
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #00b8e6 0%, #0088bb 100%);
+}
+
+.btn-secondary {
+    background: #555;
+}
+
+.btn-secondary:hover {
+    background: #666;
+}
+
+/* Layout Principal */
+/* Layout Principal - Fullscreen */
+.main-layout-fullscreen {
+    position: relative;
+    height: calc(100vh - 60px);
+    background: #1a1a1a;
+    overflow: hidden;
+}
+
+/* Viewport Fullscreen */
+.viewport-fullscreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.viewport {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: #1a1a1a;
+}
+
+/* Toggle Buttons - Fixed on Screen Edges */
+.sidebar-toggle-fixed {
+    position: fixed;
+    top: 100px; /* Posição fixa abaixo do topbar */
+    transform: translateY(-50%);
+    z-index: 1000;
+    width: 20px; /* Largura reduzida */
+    height: 50px; /* Altura reduzida */
+    background: rgba(0, 212, 255, 0.9);
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border-radius: 0 8px 8px 0;
+}
+
+.sidebar-toggle-fixed.left-toggle {
+    left: 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.sidebar-toggle-fixed.right-toggle {
+    right: 0;
+    border-radius: 8px 0 0 8px;
+}
+
+.sidebar-toggle-fixed:hover {
+    background: rgba(0, 212, 255, 1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.sidebar-toggle-fixed.hidden {
+    display: none;
+}
+
+/* Botão de Minimizar - Fora do Sidebar Expandido */
+.sidebar-minimize-fixed {
+    position: fixed;
+    top: 100px; /* Posição fixa abaixo do topbar */
+    left: 300px; /* Posição ao lado do sidebar expandido */
+    transform: translateY(-50%);
+    z-index: 1001;
+    width: 20px; /* Largura reduzida */
+    height: 50px; /* Altura reduzida */
+    background: rgba(0, 212, 255, 0.9);
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border-radius: 0 8px 8px 0;
+}
+
+.sidebar-minimize-fixed:hover {
+    background: rgba(0, 212, 255, 1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.sidebar-minimize-fixed.visible {
+    display: flex;
+}
+
+/* Botões do Sidebar Direito */
+.sidebar-minimize-fixed.right {
+    left: auto;
+    right: 300px; /* Posição ao lado do sidebar direito expandido */
+    border-radius: 8px 0 0 8px;
+}
+
+.sidebar-expand-fixed.right {
+    left: auto;
+    right: 70px; /* Posição ao lado do sidebar direito minimizado */
+    border-radius: 8px 0 0 8px;
+}
+
+/* Botão de Expandir - Fora do Sidebar Minimizado */
+.sidebar-expand-fixed {
+    position: fixed;
+    top: 100px; /* Posição fixa abaixo do topbar */
+    left: 70px; /* Posição ao lado do sidebar minimizado */
+    transform: translateY(-50%);
+    z-index: 1001;
+    width: 20px; /* Largura reduzida */
+    height: 50px; /* Altura reduzida */
+    background: rgba(0, 212, 255, 0.9);
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border-radius: 0 8px 8px 0;
+}
+
+.sidebar-expand-fixed:hover {
+    background: rgba(0, 212, 255, 1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.sidebar-expand-fixed.visible {
+    display: flex;
+}
+
+/* Sidebars Flutuantes */
+.sidebar-floating {
+    position: fixed;
+    top: 57px; /* Abaixo do topbar */
+    height: auto; /* Altura automática */
+    max-height: 90vh; /* Máximo 90% da altura da viewport */
+    width: 300px;
+    background: #222;
+    border: 1px solid #333;
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.sidebar-floating.left-sidebar {
+    left: 0;
+    border-left: none;
+}
+
+.sidebar-floating.right-sidebar {
+    right: 0;
+    border-right: none;
+}
+
+.sidebar-floating.visible {
+    display: flex;
+}
+
+.sidebar-floating.left-sidebar.visible {
+    animation: slideInLeft 0.3s ease;
+}
+
+.sidebar-floating.right-sidebar.visible {
+    animation: slideInRight 0.3s ease;
+}
+
+/* Sidebar Minimizado - Apenas Ícones */
+.sidebar-floating.minimized {
+    width: 70px !important; /* Largura fixa - SEM AJUSTE */
+    display: flex;
+    flex-direction: column;
+    padding: 2px; /* Reduzir padding interno */
+    box-sizing: border-box; /* Incluir padding na largura total */
+}
+
+/* Sidebar headers - REMOVIDOS COMPLETAMENTE */
+
+.sidebar-floating.minimized .sidebar-close {
+    display: none;
+}
+
+.sidebar-floating.minimized .sidebar-content {
+    padding: 0px; /* Sem padding interno */
+    gap: 2px; /* Reduzir gap entre elementos */
+    margin-left: -10px; /* Ajuste de posicionamento interno para 70px */
+    flex: 1;
+    box-sizing: border-box; /* Incluir padding na largura total */
+}
+
+.sidebar-floating.minimized .panel {
+    margin-bottom: 5px;
+}
+
+.sidebar-floating.minimized .panel h3 {
+    display: none;
+}
+
+/* Botão de Expandir - REMOVIDO (agora é fora do sidebar) */
+
+/* Grupos de Botões */
+.group-btn-container {
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.group-btn {
+    width: 100%;
+    height: 35px;
+    background: #444;
+    border: 1px solid #555;
+    color: #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    transition: all 0.2s;
+    font-size: 12px;
+}
+
+.group-btn:hover {
+    background: #555;
+    color: #fff;
+}
+
+.sidebar-floating.minimized .group-btn {
+    width: 50px; /* Largura ajustada para 70px total */
+    height: 35px;
+    justify-content: center;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.sidebar-floating.minimized .group-btn span {
+    display: none;
+}
+
+.sidebar-floating.minimized .group-btn .fa-chevron-down {
+    display: none;
+}
+
+/* Submenus */
+.submenu {
+    position: fixed;
+    background: #333;
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 5px;
+    min-width: 150px;
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.group-btn-container:hover .submenu {
+    display: flex;
+}
+
+/* Submenus para sidebar expandido - posição relativa */
+.sidebar-floating:not(.minimized) .submenu {
+    position: absolute;
+    left: 100%;
+    top: 0;
+}
+
+/* Submenus para sidebar minimizado - posição fixa fora do sidebar */
+.sidebar-floating.minimized .submenu {
+    position: fixed;
+    left: 70px; /* Fora do sidebar minimizado */
+    top: auto;
+}
+
+/* Botões de Ferramentas Minimizados */
+.sidebar-floating.minimized .tool-group {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.sidebar-floating.minimized .tool-btn {
+    width: 50px; /* Largura ajustada para 70px total */
+    height: 35px;
+    padding: 5px;
+    justify-content: center;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.sidebar-floating.minimized .tool-btn span {
+    display: none;
+}
+
+/* Responsividade para Sidebar Minimizado */
+.sidebar-floating.minimized .tool-group,
+.sidebar-floating.minimized .object-group,
+.sidebar-floating.minimized .import-group {
+    grid-template-columns: 1fr;
+    gap: 3px;
+}
+
+/* Sidebar Expandido - Botões Normais (sem agrupamento) */
+.sidebar-floating:not(.minimized) .group-btn-container {
+    display: none; /* Esconder grupos quando expandido */
+}
+
+.sidebar-floating:not(.minimized) .tool-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+/* Mostrar botões individuais quando expandido */
+.sidebar-floating:not(.minimized) .object-group,
+.sidebar-floating:not(.minimized) .light-group,
+.sidebar-floating:not(.minimized) .import-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+/* Esconder grupos individuais quando minimizado */
+.sidebar-floating.minimized .object-group,
+.sidebar-floating.minimized .light-group,
+.sidebar-floating.minimized .import-group {
+    display: none;
+}
+
+@keyframes slideInLeft {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+/* Sidebars Flutuantes - Headers */
+.sidebar-floating .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #333;
+    border-bottom: 1px solid #444;
+    min-height: 50px;
+}
+
+.sidebar-floating .sidebar-header h3 {
+    margin: 0;
+    font-size: 14px;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.sidebar-close {
+    background: #444;
+    border: none;
+    color: #ccc;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.sidebar-close:hover {
+    background: #ff4444;
+    color: #fff;
+}
+
+.sidebar-floating .sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* Ajustar para começar do topo sem header */
+    margin-top: 0;
+}
+
+.sidebar-left.collapsed,
+.sidebar-right.collapsed {
+    width: 50px;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #333;
+    border-bottom: 1px solid #444;
+    min-height: 50px;
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    font-size: 14px;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.sidebar-toggle {
+    background: #444;
+    border: none;
+    color: #ccc;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.sidebar-toggle:hover {
+    background: #555;
+    color: #fff;
+}
+
+.sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebar-left.collapsed .sidebar-content,
+.sidebar-right.collapsed .sidebar-content {
+    display: none;
+}
+
+/* Resize Handles para Sidebars Flutuantes */
+.sidebar-resize-handle {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: transparent;
+    cursor: col-resize;
+    z-index: 10;
+    transition: background 0.2s;
+}
+
+.sidebar-resize-handle.left {
+    left: 0;
+}
+
+.sidebar-resize-handle.right {
+    right: 0;
+}
+
+.sidebar-resize-handle:hover {
+    background: #00d4ff;
+}
+
+.sidebar-floating.left-sidebar .sidebar-resize-handle.right {
+    right: 0;
+}
+
+.sidebar-floating.right-sidebar .sidebar-resize-handle.left {
+    left: 0;
+}
+
+.sidebar-right {
+    border-right: none;
+    border-left: 1px solid #333;
+}
+
+/* Painéis */
+.panel {
+    padding: 20px;
+    border-bottom: 1px solid #333;
+}
+
+.panel h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ccc;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Grupos de Ferramentas */
+.tool-group,
+.object-group,
+.import-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+/* Responsividade para Sidebar Minimizado */
+.sidebar-floating.minimized .tool-group,
+.sidebar-floating.minimized .object-group,
+.sidebar-floating.minimized .import-group {
+    grid-template-columns: 1fr;
+    gap: 5px;
+}
+
+.tool-btn,
+.object-btn,
+.import-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 8px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background: #2a2a2a;
+    color: #ccc;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 12px;
+}
+
+.tool-btn:hover,
+.object-btn:hover,
+.import-btn:hover {
+    background: #333;
+    border-color: #555;
+    color: #fff;
+}
+
+.tool-btn.active {
+    background: #00d4ff;
+    border-color: #00d4ff;
+    color: #000;
+}
+
+.tool-btn i,
+.object-btn i,
+.import-btn i {
+    font-size: 16px;
+}
+
+/* Viewport */
+.viewport-container {
+    flex: 1;
+    position: relative;
+    background: #1a1a1a;
+}
+
+.viewport {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.viewport-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.viewport-info {
+    position: absolute;
+    top: 20px;
+    left: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 12px;
+    color: #ccc;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 8px 12px;
+    border-radius: 6px;
+    backdrop-filter: blur(10px);
+    /* Largura fixa com max-width */
+    width: 100px;
+    max-width: 100px;
+    white-space: nowrap;
+}
+
+/* Painel de Propriedades */
+#properties-panel {
+    font-size: 14px;
+}
+
+.no-selection,
+.no-materials {
+    color: #666;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Scene Panel Fixed */
+.scene-panel-fixed {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    max-height: 40vh;
+    overflow-y: auto;
+}
+
+/* Scene Items */
+.scene-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    margin: 2px 0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 13px;
+    position: relative;
+}
+
+.scene-item:hover {
+    background-color: #333;
+}
+
+.scene-item.selected {
+    background-color: #00d4ff20;
+    border: 1px solid #00d4ff;
+}
+
+.scene-item.locked {
+    opacity: 0.6;
+}
+
+.scene-item.hidden {
+    opacity: 0.3;
+    text-decoration: line-through;
+}
+
+.scene-item i {
+    width: 14px;
+    text-align: center;
+    color: #00d4ff;
+    flex-shrink: 0;
+}
+
+.scene-item span {
+    flex: 1;
+    color: #ccc;
+    font-size: 12px;
+}
+
+.scene-item-actions {
+    display: flex;
+    gap: 6px;
+    opacity: 1; /* Sempre visível */
+    transition: opacity 0.2s;
+}
+
+.scene-item-action {
+    width: 18px;
+    height: 18px;
+    border: 1px solid #555;
+    background: #333;
+    color: #ccc;
+    border-radius: 2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.scene-item-action:hover {
+    background: #444;
+    border-color: #666;
+}
+
+.scene-item-action.checked {
+    background: #00d4ff;
+    border-color: #00d4ff;
+    color: #fff;
+}
+
+.scene-item-action.delete {
+    background: #ff4444;
+    border-color: #ff4444;
+    color: #fff;
+}
+
+.scene-item-action.delete:hover {
+    background: #ff6666;
+    border-color: #ff6666;
+}
+
+.scene-item-action.lock {
+    background: #333;
+    border-color: #555;
+    color: #ccc;
+}
+
+.scene-item-action.lock.checked {
+    background: #ff4444;
+    border-color: #ff4444;
+    color: #fff;
+}
+
+.scene-item-action.lock:hover {
+    background: #ff6666;
+    border-color: #ff6666;
+    color: #fff;
+}
+
+.scene-item-action.visibility {
+    background: #333;
+    border-color: #555;
+    color: #ccc;
+}
+
+.scene-item-action.visibility.checked {
+    background: #00aa44;
+    border-color: #00aa44;
+    color: #fff;
+}
+
+.scene-item-action.visibility:hover {
+    background: #00cc66;
+    border-color: #00cc66;
+    color: #fff;
+}
+
+.property-group {
+    margin-bottom: 20px;
+    padding: 12px;
+    background: #2a2a2a;
+    border-radius: 6px;
+    border: 1px solid #333;
+}
+
+.property-group h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.property {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    padding: 4px 0;
+}
+
+.property label {
+    color: #ccc;
+    font-size: 12px;
+    font-weight: 500;
+    min-width: 60px;
+}
+
+.property input {
+    background: #333;
+    border: 1px solid #555;
+    border-radius: 4px;
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 12px;
+    width: 80px;
+}
+
+.property input[type="color"] {
+    width: 40px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}
+
+.property input:focus {
+    outline: none;
+    border-color: #00d4ff;
+    box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2);
+}
+
+/* Painel da Cena */
+.scene-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    margin: 4px 0;
+    background: #2a2a2a;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.scene-item:hover {
+    background: #333;
+}
+
+.scene-item i {
+    color: #00d4ff;
+    width: 16px;
+}
+
+/* Footer */
+.footer {
+    height: 30px;
+    background: #1a1a1a;
+    border-top: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 12px;
+    color: #666;
+}
+
+.status-bar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+    .sidebar-left,
+    .sidebar-right {
+        width: 240px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar-left,
+    .sidebar-right {
+        width: 200px;
+    }
+    
+    .tool-group,
+    .object-group,
+    .import-group {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.panel {
+    animation: fadeIn 0.3s ease;
+}
+
+/* Estados de loading */
+.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
